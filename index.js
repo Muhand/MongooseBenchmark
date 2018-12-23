@@ -11,6 +11,10 @@ let api = express.Router()
 app.server = http.createServer(app)
 
 
+/**
+ * This EP will generate random documents on the db
+ * @type {Endpoint}
+ */
 app.get('/generate/:numberOfDocs?', (req, res) => {
   let docs = req.params.numberOfDocs
 
