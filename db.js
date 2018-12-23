@@ -7,7 +7,7 @@ const initialize = () =>
     (resolve, reject) => {
       mongoose.Promise = global.Promise;
 
-      let dbURL = `mongodb://test:test@localhost:2717/benchmarking`;
+      let dbURL = `mongodb://test:test@localhost:27017/benchmarking`;
 
       const options = {
         //Refer to http://mongoosejs.com/docs/connections.html#use-mongo-client for more info on options
