@@ -2,10 +2,12 @@
 
 const http = require('http')
 const express = require('express')
+const initializeDb = require('./db')
 
 // Initialize the server
 let app = express()
 let api = express.Router()
+
 app.server = http.createServer(app)
 
 
@@ -23,14 +25,19 @@ app.get('/generate/:numberOfDocs?', (req, res) => {
 // Catch 404
 app.use( (req, res) => {
   res.status(404)
-  res.send('Not Found').status(404)
+  res.send('Not Found')
 });
 
-// Setup the server port
-var port = 3000
-
-app.server.listen(port, err => {
-  err ? () => {throw err} : console.log(`Server Started`)
-});
+// Initialize db
+initializeDb()
+  .then(
+    () => {
+      // If db was initialized successfully then start the server
+      app.server.listen(process.env.PORT || 3000, err => {
+        err ? () => {throw err} : console.log(`Server Started`)
+      });
+    }
+  )
+  .catch(err => { console.log('Failed to start server\n'); throw err })
 
 module.exports = app;
