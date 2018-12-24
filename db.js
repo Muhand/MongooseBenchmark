@@ -1,13 +1,13 @@
-'use strict';
+'use strict'
 
 const mongoose = require('mongoose')
 
 const initialize = () =>
   new Promise(
     (resolve, reject) => {
-      mongoose.Promise = global.Promise;
+      mongoose.Promise = global.Promise
 
-      let dbURL = `mongodb://test:test@localhost:27017/benchmarking`;
+      let dbURL = `mongodb://test:test@localhost:27017/benchmarking`
 
       const options = {
         //Refer to http://mongoosejs.com/docs/connections.html#use-mongo-client for more info on options
@@ -17,14 +17,13 @@ const initialize = () =>
       mongoose.connect(dbURL, options)
         .then(
           ()=>{
-            resolve();
+            resolve()
           },
           err=>{
-            reject(new Error(err));
-            // throw err;
+            reject(new Error(err))
           }
-        );
+        )
       }
-    );
+    )
 
 module.exports = initialize
